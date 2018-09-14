@@ -4,3 +4,5 @@
  * having to figure out which file they belong to!
  */
 
+ export {default as Input} from './Input'
+ export {default as Feedback} from './Feedback'

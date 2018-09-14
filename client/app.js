@@ -1,9 +1,11 @@
 import React from 'react'
-// import other components here
+import {Input, Feedback} from './components'
+
 const App = () => {
   return (
     <div>
-      {/* display other components */}
+      <Input />
+      <Feedback />
     </div>
   )
 }
