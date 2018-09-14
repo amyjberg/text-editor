@@ -23,4 +23,17 @@ form div {
 textarea {
   width: 45vw;
   height: 80vh;
+  background-color: aliceblue;
+}
+
+#app {
+  display: flex
+}
+
+#input {
+  background-color: aliceblue;
+}
+
+#feedback {
+  background-color: blanchedalmond;
 }

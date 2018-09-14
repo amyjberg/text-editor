@@ -3,7 +3,7 @@ import {Input, Feedback} from './components'
 
 const App = () => {
   return (
-    <div>
+    <div id="app">
       <Input />
       <Feedback />
     </div>
