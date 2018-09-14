@@ -1,13 +1,9 @@
 import React from 'react'
-
-import {Navbar} from './components'
-import Routes from './routes'
-
+// import other components here
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <Routes />
+      {/* display other components */}
     </div>
   )
 }
