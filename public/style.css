@@ -19,3 +19,8 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+textarea {
+  width: 45vw;
+  height: 80vh;
+}

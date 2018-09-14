@@ -26,6 +26,7 @@ export const updateText = text => ({
  * REDUCER
  */
 export default function(state = initialState, action) {
+  console.log('inside reducer with action', action)
   switch (action.type) {
     case UPDATED_TEXT:
       return action.text

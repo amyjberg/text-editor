@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 const Feedback = () => {
   return (
-    <div>
+    <div id="feedback">
       {/* display other components */}
     </div>
   )
