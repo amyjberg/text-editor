@@ -6,7 +6,8 @@ class Input extends React.Component {
   constructor() {
     super()
     this.state = {
-      text: ''
+      text: '',
+      suggestions: []
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -36,4 +37,9 @@ const mapDispatch = dispatch => ({
   updateCode: text => dispatch(updateText(text))
 })
 
-export default connect(null, mapDispatch)(Input)
+const mapState = state => ({
+  keywords: state.keywords,
+  variables: state.variables
+})
+
+export default connect(mapState, mapDispatch)(Input)
