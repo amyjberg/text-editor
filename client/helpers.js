@@ -16,8 +16,8 @@ const getObjectSuggestions = (objects, word) => {
     finalObjectInChain = finalObjectInChain[chainedText[i]]
   }
 
-  if (word[word.length - 1] === '.') { // we have all the options available
-    // note: Object.keys of a string will return string indices, so we have to be sure to check here
+  if (word[word.length - 1] === '.') { // we have all the keys available because they've typed out 'object.'
+    // note: Object.keys of a string will return string indices, so we have to be sure to check here that we are getting the keys of an object
     return typeof finalObjectInChain === 'object' ? Object.keys(finalObjectInChain) : []
   } else {
     // they have started typing out a final property, so we want to give suggestions that match that property
@@ -39,7 +39,7 @@ const getMatches = (obj, word) => {
   return suggestions
 }
 
-const getLastWord = text => {
+export const getLastWord = text => {
   const words = text.split(' ')
   return words[words.length - 1]
 }
