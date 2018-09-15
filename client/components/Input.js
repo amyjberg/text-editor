@@ -1,9 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {updateText} from '../store/userText'
+import {Suggestion} from './index'
 
 const getSuggestions = (keywords, variables, text) => {
-    // look at last word and generate list of keywords that match it
+  // look at last word and generate list of keywords that match it
   // we shouldn't make suggestions if we're inside of a string, though...
 
   const keywordNames = Object.keys(keywords)
@@ -15,7 +16,7 @@ const getSuggestions = (keywords, variables, text) => {
 
   // for now, just base it off of the last word in the text
   const words = text.split('')
-  const lastWord = words[words.length - 1]
+  const lastWord = words[words.length - 1] // maybe check here to see if there is a period, and if there is, check for the objects that have properties?
   const suggestions = []
 
   for (let i = 0; i < allTerms.length; i++) {
@@ -37,13 +38,21 @@ class Input extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.renderSuggestions = this.renderSuggestions.bind(this)
+    this.selectSuggestion = this.selectSuggestion.bind(this)
+  }
+
+  selectSuggestion(suggestion) {
+    // update this.state.text with the suggestion that was chosen
+    console.log('inside selectSuggetion:', suggestion)
   }
 
   renderSuggestions() {
+    // should renderSuggestions try to figure out if we're inside a string or not?
+    // then if we are inside a string, this function can return an empty array?
     const suggestions = getSuggestions(this.props.keywords, this.props.variables, this.state.text)
     return <div>
       {
-        suggestions.map(suggestion => <div>{suggestion}</div>)
+        suggestions.map(suggestion => <Suggestion suggestion={suggestion} selectSuggestion={this.selectSuggestion}/>)
       }
     </div>
   }
@@ -57,16 +66,18 @@ class Input extends React.Component {
     })
 
     this.props.updateCode(evt.target.value)
-    // we also want to find suggestions, right?
-    // right now this happens to late
-    // this.getSuggestions()
   }
 
   render() {
     return (
       <div id="input">
-        <h3>Type in your code below:</h3>
-        <textarea value={this.state.text} onChange={this.handleChange} />
+        <h3>Type in the box below:</h3>
+        <textarea
+          id="textarea-input"
+          value={this.state.text}
+          onChange={this.handleChange}
+
+          />
         <h3>Suggestions:</h3>
         { this.renderSuggestions() }
       </div>

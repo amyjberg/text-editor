@@ -6,3 +6,4 @@
 
  export {default as Input} from './Input'
  export {default as Feedback} from './Feedback'
+ export {default as Suggestion} from './Suggestion'
