@@ -20,7 +20,8 @@ class Input extends React.Component {
     const lastWord = getLastWord(text)
     let indexCutoff;
     if (lastWord.indexOf('.') !== -1) {
-      // we don't want to go all the way back to the space to replace, we just want to go back to the period
+      // we don't want replace the whole word, we just want to go back to the period
+      // because the user has selected a property
       indexCutoff = text.lastIndexOf('.')
     } else {
       // we want to replace at the start of the word, i.e. the space
@@ -28,11 +29,9 @@ class Input extends React.Component {
     }
 
     const newText = text.slice(0, indexCutoff + 1) + suggestion
-
     this.setState({
       text: newText
     })
-
     this.props.updateCode(newText)
   }
 
@@ -46,13 +45,10 @@ class Input extends React.Component {
   }
 
   handleChange(evt) {
-    // when user types in the textarea input
-    // we want to update the redux store
-    // do we need local state at all?
+    // eliminate local state and just use redux store?
     this.setState({
       text: evt.target.value
     })
-
     this.props.updateCode(evt.target.value)
   }
 
