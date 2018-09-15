@@ -22,19 +22,30 @@ form div {
 
 textarea {
   width: 45vw;
-  height: 80vh;
+  height: 80%;
   background-color: aliceblue;
 }
 
 #app {
-  display: flex
+  display: flex;
+  height: 60vh;
 }
 
 #input {
-  background-color: aliceblue;
+  padding: 2vh;
 }
 
 #feedback {
   font-family: monospace;
+  font-weight: bold;
+  padding: 2vh;
+}
+
+.suggestion {
+  background-color: whitesmoke;
+  border-bottom: 1px solid orange;
+}
+
+.suggestion:hover {
   font-weight: bold;
 }

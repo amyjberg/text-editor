@@ -4,6 +4,7 @@ import {updateText} from '../store/userText'
 import {Suggestion} from './index'
 
 const getSuggestions = (keywords, variables, text) => {
+  if (!text) return []
   // look at last word and generate list of keywords that match it
   // we shouldn't make suggestions if we're inside of a string, though...
 
@@ -15,8 +16,9 @@ const getSuggestions = (keywords, variables, text) => {
   const allTerms = [...keywordNames, ...variableNames]
 
   // for now, just base it off of the last word in the text
-  const words = text.split('')
+  const words = text.split(' ')
   const lastWord = words[words.length - 1] // maybe check here to see if there is a period, and if there is, check for the objects that have properties?
+  console.log('last word', lastWord)
   const suggestions = []
 
   for (let i = 0; i < allTerms.length; i++) {
@@ -44,6 +46,16 @@ class Input extends React.Component {
   selectSuggestion(suggestion) {
     // update this.state.text with the suggestion that was chosen
     console.log('inside selectSuggetion:', suggestion)
+    const {text} = this.state
+    const lastSpaceIndex = text.lastIndexOf(' ')
+    const newText = text.slice(0, lastSpaceIndex + 1) + suggestion
+
+    this.setState({
+      text: newText
+    })
+
+    // note: this updates the state, but we don't end up calling 'handleChange' so the redux store doesn't get alerted
+    this.props.updateCode(newText)
   }
 
   renderSuggestions() {
