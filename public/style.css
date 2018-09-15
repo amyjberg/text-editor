@@ -35,5 +35,6 @@ textarea {
 }
 
 #feedback {
-  background-color: blanchedalmond;
+  font-family: monospace;
+  font-weight: bold;
 }
