@@ -20,7 +20,7 @@ form div {
   display: inline-block;
 }
 
-textarea {
+#input-text {
   width: 45vw;
   height: 80%;
   background-color: aliceblue;
@@ -31,14 +31,17 @@ textarea {
   height: 60vh;
 }
 
-#input {
+#input-container {
   padding: 2vh;
 }
 
-#feedback {
+#feedback-container {
+  padding: 2vh;
+}
+
+#feedback-code {
   font-family: monospace;
   font-weight: bold;
-  padding: 2vh;
 }
 
 .suggestion {

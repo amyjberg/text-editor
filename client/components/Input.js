@@ -3,22 +3,30 @@ import {connect} from 'react-redux'
 import {updateText} from '../store/userText'
 import {Suggestion} from './index'
 
+const inOpenString = text => {
+  const allQuotes = []
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] === "'") allQuotes.push(text[i])
+  }
+  // if we are in an open string, the length of allQuotes will be odd
+  return !!(allQuotes.length % 2 === 1)
+}
+
 const getSuggestions = (keywords, variables, text) => {
-  if (!text) return []
-  // look at last word and generate list of keywords that match it
-  // we shouldn't make suggestions if we're inside of a string, though...
+  if (inOpenString(text)) return [] // if we're in an open string, don't make suggestions
 
   const keywordNames = Object.keys(keywords)
   const variableNames = Object.keys(variables)
   // how to deal with obj.foo2.foo3?
-  // convert objects in variables to the format obj.foo1, obj.foo2.foo3 recursively? then store them in an array?
+  // convert objects in variables to the format obj.foo1, obj.foo2? then store them in an array?
   // but we don't want all the suggestions to pop up right away -- only if they've typed obj do we see the rest of the suggestions
   const allTerms = [...keywordNames, ...variableNames]
 
   // for now, just base it off of the last word in the text
   const words = text.split(' ')
   const lastWord = words[words.length - 1] // maybe check here to see if there is a period, and if there is, check for the objects that have properties?
-  console.log('last word', lastWord)
+  if (!lastWord) return [] // so we don't give suggestions if they haven't started typing out a new word yet
+
   const suggestions = []
 
   for (let i = 0; i < allTerms.length; i++) {
@@ -44,8 +52,6 @@ class Input extends React.Component {
   }
 
   selectSuggestion(suggestion) {
-    // update this.state.text with the suggestion that was chosen
-    console.log('inside selectSuggetion:', suggestion)
     const {text} = this.state
     const lastSpaceIndex = text.lastIndexOf(' ')
     const newText = text.slice(0, lastSpaceIndex + 1) + suggestion
@@ -54,7 +60,6 @@ class Input extends React.Component {
       text: newText
     })
 
-    // note: this updates the state, but we don't end up calling 'handleChange' so the redux store doesn't get alerted
     this.props.updateCode(newText)
   }
 
@@ -82,10 +87,10 @@ class Input extends React.Component {
 
   render() {
     return (
-      <div id="input">
+      <div id="input-container">
         <h3>Type in the box below:</h3>
         <textarea
-          id="textarea-input"
+          id="input-text"
           value={this.state.text}
           onChange={this.handleChange}
 

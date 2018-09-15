@@ -44,9 +44,9 @@ const Feedback = ({keywords, userText}) => {
   }
 
   return (
-    <div id="feedback">
+    <div id="feedback-container">
       <h3>Your code:</h3>
-      <span>{
+      <span id="feedback-code">{
         words.map(word => mapWordToSpan(word))
       }</span>
     </div>
