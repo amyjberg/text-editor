@@ -1,31 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
-const findWordsAndStrings = text => {
-  const words = []
-  let insideString = false
-  let currentWord = ''
-  for (let i = 0; i < text.length; i++) {
-    // only worrying about single quotes for now
-    if (text[i] === "'") {
-      // either at beginning or end of string
-      insideString = !insideString
-      currentWord += text[i]
-    } else if (text[i] === ' ' && !insideString) {
-      // we are at the end of a word
-      words.push(currentWord)
-      currentWord = ''
-    } else {
-      // keep adding characters to the current word
-      currentWord += text[i]
-    }
-  }
-  // at end of loop, if we still have a currentWord that hasn't been added
-  if (currentWord) {
-    words.push(currentWord)
-  }
-  return words
-}
+import {findWordsAndStrings} from '../helpers'
 
 const Feedback = ({keywords, userText}) => {
   const words = findWordsAndStrings(userText)
